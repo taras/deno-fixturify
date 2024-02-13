@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync } from "node:fs";
 
 export function removeTestDir() {
   if (existsSync("testdir.tmp")) {
