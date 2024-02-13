@@ -2,9 +2,7 @@ import fsNode from "node:fs";
 import path from "node:path";
 import ensurePosix from "npm:ensure-posix-path@1.1.1";
 import MatcherCollection from "npm:matcher-collection@2.0.1";
-import {
-  Minimatch, MinimatchOptions,
-} from "npm:minimatch@9.0.3";
+import { Minimatch, MinimatchOptions } from "npm:minimatch@9.0.3";
 import { IMinimatch } from "./types.ts";
 
 export function entries(
@@ -197,14 +195,14 @@ function _walkSync(
 
     const entries = names
       .map((name) => {
-        let entryRelativePath = relativePath + name;
+        const entryRelativePath = relativePath + name;
 
         if (ignoreMatcher && ignoreMatcher.match(entryRelativePath)) {
           return;
         }
 
-        let fullPath = baseDir + "/" + entryRelativePath;
-        let stats = getStat(fullPath, fs);
+        const fullPath = baseDir + "/" + entryRelativePath;
+        const stats = getStat(fullPath, fs);
 
         if (stats && stats.isDirectory()) {
           return new Entry(
@@ -212,7 +210,7 @@ function _walkSync(
             baseDir,
             stats.mode ? stats.mode : 0,
             stats.size,
-            stats.mtime ? stats.mtime.getTime(): 0,
+            stats.mtime ? stats.mtime.getTime() : 0,
           );
         } else {
           return new Entry(
@@ -229,7 +227,7 @@ function _walkSync(
     const sortedEntries = entries.sort(lexicographically);
 
     for (let i = 0; i < sortedEntries.length; ++i) {
-      let entry = sortedEntries[i];
+      const entry = sortedEntries[i];
 
       if (entry.isDirectory()) {
         if (

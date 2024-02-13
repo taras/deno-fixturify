@@ -7,8 +7,8 @@ import { removeTestDir } from "../test_helpers.ts";
 import { DirJSON } from "./types.ts";
 import { writeSync } from "./writeSync.ts";
 
-Deno.test("writeSync", async () => {
-  await removeTestDir();
+Deno.test("writeSync", () => {
+  removeTestDir();
 
   const dir: DirJSON = {
     "foo.txt": "foo.txt contents",
@@ -74,8 +74,8 @@ Deno.test("writeSync", async () => {
   assertEquals(fs.readdirSync("testdir.tmp/empty-dir").sort(), []);
 });
 
-Deno.test("writeSync remove", async () => {
-  await removeTestDir();
+Deno.test("writeSync remove", () => {
+  removeTestDir();
 
   fs.mkdirSync("testdir.tmp");
   fs.writeFileSync("testdir.tmp/foo.txt", "foo.txt contents");
@@ -124,22 +124,22 @@ Deno.test("writeSync remove", async () => {
 });
 
 Deno.test("writeSync arguments requires specific input", () => {
-  // @ts-ignore
+  // @ts-expect-error deno-ts(2554)
   assertThrows(() => writeSync());
-  // @ts-ignore
+  // @ts-ignore deno-ts(2554)
   assertThrows(() => writeSync(null));
-  // @ts-ignore
+  // @ts-expect-error deno-ts(2554)
   assertThrows(() => writeSync(null, null));
-  // @ts-ignore
+  // @ts-expect-error deno-ts(2554)
   assertThrows(() => writeSync(null, {}));
 });
 
 Deno.test(
   "writeSync guards against misuse that could cause data loss",
-  async () => {
+  () => {
     // Test that we guard against usage errors that might cause data loss
     // through fs.removeSync('' + '/' + '') or similar.
-    await removeTestDir();
+    removeTestDir();
 
     assertThrows(
       () => writeSync("", {}),
@@ -170,8 +170,8 @@ Deno.test(
 
 Deno.test(
   "writeSync handles overwriting a file and then creating a new file",
-  async () => {
-    await removeTestDir();
+  () => {
+    removeTestDir();
 
     fs.mkdirSync("testdir.tmp");
 
