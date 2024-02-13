@@ -1,6 +1,7 @@
-export async function removeTestDir() {
-  const info = await Deno.stat("testdir.tmp");
-  if (info.isDirectory) {
-    await Deno.remove("testdir.tmp", { recursive: true });
+import { existsSync } from 'node:fs';
+
+export function removeTestDir() {
+  if (existsSync("testdir.tmp")) {
+    Deno.removeSync("testdir.tmp", { recursive: true });
   }
 }

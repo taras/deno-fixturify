@@ -8,8 +8,8 @@ import { readSync } from "./readSync.ts";
 
 const CONSOLE_LOG = console.log;
 
-Deno.test("readSync", async () => {
-  await removeTestDir();
+Deno.test("readSync", () => {
+  removeTestDir();
 
   fs.mkdirSync("testdir.tmp");
   fs.writeFileSync("testdir.tmp/foo.txt", "foo.txt contents");
@@ -30,8 +30,8 @@ Deno.test("readSync", async () => {
   });
 });
 
-Deno.test("readSync include", async () => {
-  await removeTestDir();
+Deno.test("readSync include", () => {
+  removeTestDir();
 
   fs.mkdirSync("testdir.tmp");
   fs.writeFileSync("testdir.tmp/foo.txt", "foo.txt contents");
@@ -71,8 +71,8 @@ Deno.test("readSync include", async () => {
   }
 });
 
-Deno.test("readSync ignore", async () => {
-  await removeTestDir();
+Deno.test("readSync ignore", () => {
+  removeTestDir();
 
   fs.mkdirSync("testdir.tmp");
   fs.writeFileSync("testdir.tmp/foo.txt", "foo.txt contents");
@@ -119,8 +119,8 @@ Deno.test("readSync ignore", async () => {
   }
 });
 
-Deno.test("readSync ignoreEmptyDirs false", async () => {
-  await removeTestDir();
+Deno.test("readSync ignoreEmptyDirs false", () => {
+  removeTestDir();
 
   fs.mkdirSync("testdir.tmp");
   fs.mkdirSync("testdir.tmp/emptydir");
@@ -130,8 +130,8 @@ Deno.test("readSync ignoreEmptyDirs false", async () => {
   });
 });
 
-Deno.test("readSync ignoreEmptyDirs true", async () => {
-  await removeTestDir();
+Deno.test("readSync ignoreEmptyDirs true", () => {
+  removeTestDir();
 
   fs.mkdirSync("testdir.tmp");
   fs.mkdirSync("testdir.tmp/emptydir");
@@ -144,8 +144,8 @@ Deno.test("readSync ignoreEmptyDirs true", async () => {
   );
 });
 
-Deno.test("readSync throws on broken symlinks", async () => {
-  await removeTestDir();
+Deno.test("readSync throws on broken symlinks", () => {
+  removeTestDir();
 
   fs.mkdirSync("testdir.tmp");
   fs.symlinkSync("doesnotexist", "testdir.tmp/symlink");
